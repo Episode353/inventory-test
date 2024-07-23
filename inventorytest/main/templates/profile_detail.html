@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ profile.user.username }}'s Profile</title>
+</head>
+<body>
+    <h1>{{ profile.user.username }}'s Profile</h1>
+    <div style="background-color: lightgrey;">
+        <p>Essence: {{ profile.essence }}</p>
+        {% if profile.profile_pic %}
+            <img src="{{ profile.profile_pic.url }}" alt="Profile Picture">
+        {% endif %}
+        {% if profile.top_down_photo %}
+            <img src="{{ profile.top_down_photo.url }}" alt="Top Down Photo">
+        {% endif %}
+        <p>Bio: {{ profile.bio }}</p>
+        <h3>Info</h3>
+        <pre>{{ profile.info|safe }}</pre>
+
+        <h3>Inventory</h3>
+        <ul>
+            {% for item in items %}
+                <li>{{ item.name }} - {{ item.description }}</li>
+            {% empty %}
+                <li>No items available.</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Characters</h3>
+        <ul>
+            {% for character in characters %}
+                <li>{{ character.name }} - {{ character.bio }}</li>
+            {% empty %}
+                <li>No characters available.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
