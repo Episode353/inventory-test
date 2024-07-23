@@ -1,42 +1,33 @@
-
-from django.shortcuts import render
-from .models import Profile, Item, Set, Bundle, Character
-
-def profile_list(request):
-    if request.user.is_authenticated:
-        profile = Profile.objects.get(user=request.user)
-        context = {
-            'profile': profile,
-            'items': profile.inventory.all(),
-            'characters': profile.characters.all(),
-        }
-        return render(request, 'profile_detail.html', context)
-    else:
-        profiles = Profile.objects.all().prefetch_related('inventory', 'characters')
-        items = Item.objects.all()
-        sets = Set.objects.all()
-        bundles = Bundle.objects.all()
-        characters = Character.objects.all()
-
-        context = {
-            'profiles': profiles,
-            'items': items,
-            'sets': sets,
-            'bundles': bundles,
-            'characters': characters,
-        }
-        return render(request, 'profile_list.html', context)
-
-
+from django.shortcuts import render, redirect
+from django.contrib.auth import logout
+from .models import Profile
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 
-# Your existing imports and views
+@login_required(login_url='login')  # Redirect to login if not authenticated
+def account(request):
+    try:
+        profile = Profile.objects.get(user=request.user)
+        items = profile.inventory.all()
+        characters = profile.characters.all()
+    except Profile.DoesNotExist:
+        profile = None
+        items = []
+        characters = []
+
+    context = {
+        'profile': profile,
+        'items': items,
+        'characters': characters,
+    }
+    return render(request, 'profile_detail.html', context)
 
 class CustomLoginView(LoginView):
     template_name = 'login.html'
 
-
-
-# Create your views here.
 def index(request):
-    return render(request, 'test1.html')
+    return render(request, 'index.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('index')

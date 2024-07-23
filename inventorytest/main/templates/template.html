@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website Name</title>
+
+    <style>
+        .login-stuff{
+            border: 1px black solid;
+            padding: 1rem;
+            margin: 1rem;
+        }
+
+        .content-block{
+            border: 1px black solid;
+            padding: 1rem;
+            margin: 1rem;
+        }
+
+        .header-links{
+            border: 1px black solid;
+            padding: 1rem;
+            margin: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-stuff">
+        {% if user.is_authenticated %}
+        <a style="color:green;">Logged in as:{{ request.user }}</a>
+        <a href="{% url 'logout' %}" id="logoutBtn">Logout</a>
+        <a href="{% url 'account' %}">My Account</a>
+        {% else %}
+        <a href="{% url 'login' %}">Login</a>
+
+        {% endif%}
+    </div>
+
+    <div class="header-links">
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'account' %}">Profile Info</a>
+    </div>
+    <div class="content-block">
+        
+        {% block content %}
+        {% endblock %}
+        
+    </div>
+</body>
+</html>

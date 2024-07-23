@@ -23,8 +23,6 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-
-
 class Character(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='character_profiles', blank=True, null=True)
@@ -33,7 +31,6 @@ class Character(models.Model):
     
     def __str__(self):
         return self.name or 'Unnamed Character'
-
 
 class Set(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
@@ -50,4 +47,3 @@ class Bundle(models.Model):
 
     def __str__(self):
         return self.name or 'Unnamed Bundle'
-

@@ -1,0 +1,22 @@
+{% extends "template.html" %}
+{% block content %}
+
+<h1>The Test Page for the Aether Inventory System</h1>
+<p>(AIS)</p>
+<p>Visit your profile page here:<p>
+<a href="{% url 'account' %}">Profile Info</a>
+<p>This page displays all sorts of data assosiated wiht your profile</p>
+</br>
+<p>However, you must be logged in, so if you arent, you may do so here:</p>
+<a href="{% url 'login' %}">Go to Login</a>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+

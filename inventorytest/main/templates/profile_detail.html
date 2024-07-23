@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ profile.user.username }}'s Profile</title>
-</head>
-<body>
+{% extends "template.html" %}
+
+
+{% block content %}
     <h1>{{ profile.user.username }}'s Profile</h1>
     <div style="background-color: lightgrey;">
         <p>Essence: {{ profile.essence }}</p>
@@ -35,5 +33,4 @@
             {% endfor %}
         </ul>
     </div>
-</body>
-</html>
+{% endblock %}
