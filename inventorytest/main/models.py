@@ -26,6 +26,17 @@ class Profile(models.Model):
 class Character(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='character_profiles', blank=True, null=True)
+    # Stats
+    strength = models.IntegerField()
+    dexterity = models.IntegerField()
+    constitution = models.IntegerField()
+    intelligence = models.IntegerField()
+    wisdom = models.IntegerField()
+    charisma = models.IntegerField()
+
+    level = models.IntegerField()
+    character_class = models.TextField(blank=True, null=True)
+
     top_down_photo = models.ImageField(upload_to='characters/', blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
     
